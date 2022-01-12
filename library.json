@@ -1,0 +1,25 @@
+{
+    "name" : "VCS",
+    "description": "Library that allows version/compilation info to be embedded in target binaries",
+    "keywords": "Version Control, Git, Trace, Status",
+    "authors": [
+        {
+            "name": "James Bennion-Pedley",
+            "url": "https://github.com/BOJIT",
+            "maintainer": true
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/BOJIT/VCS"
+    },
+    "version" : "0.0.1",
+    "license": "MIT",
+    "frameworks": "",
+    "platforms": "",
+    "build" : {
+        "srcDir": "src",
+        "includeDir": "src",
+        "extraScript": "lib_build.py"
+    }
+}
