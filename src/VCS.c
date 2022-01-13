@@ -18,10 +18,10 @@ extern "C" {
  * @brief Version control block
  */
 vcs_t vcs = {
-    {255, 254, 253, 254},       /* frame_start */
+    {0xFF, 0xFE, 0xFD, 0xFC},       /* frame_start */
     1,                          /* schema */
     "2000-10-31T10:54:59Z",     /* compile_time */
-    {1, 2, 3, 4}                /* frame_end */
+    {0x01, 0x02, 0x03, 0x04}        /* frame_end */
 };
 
 /*----------------------------------------------------------------------------*/

@@ -1,3 +1,10 @@
+"""@lib_build
+Script for extracting version control information at compile time
+
+Runs as a PlatformIO library build hook. Can also be ported to other IDEs, or
+run manually if another means of modifying the environment is provided.
+"""
+
 import sys
 import os
 import shutil
