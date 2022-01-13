@@ -1,6 +1,44 @@
 # VCS
 Tool for embedding version control and status into binary builds with PlatformIO
 
+## Overview
+
+This tool automatically embeds version information into your PlatformIO project.
+This info is embedded in the built binaries, and is accessible in your program
+through a standard header file. The following information is captured:
+
+### With `Git`
+
+This library is most powerful if using PlatformIO within a `Git` repository, as
+exact tag/author/commit info can be pulled: see below:
+
+```json
+{
+    "schema": 1,
+    "compile_time": "2022-01-13T12:03Z",
+    "short_hash": "293b1c5",
+    "is_dirty": true,
+    "tag_describe": "1.0.0-2-g293b1c5",
+    "last_author": "James Bennion-Pedley"
+}
+```
+
+### Without `Git`
+
+The library still works, but does not include the repository fields: the author
+is set based on the username of the compiling computer:
+
+```json
+{
+    "schema": 1,
+    "compile_time": "2022-01-13T12:12Z",
+    "short_hash": "N/A",
+    "is_dirty": true,
+    "tag_describe": "N/A",
+    "last_author": "james"
+}
+```
+
 ## Usage
 Add the library to your project
 
