@@ -11,6 +11,7 @@
 #define __VCS_H__
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,6 +27,10 @@ typedef struct __attribute__ ((packed)) {
     uint8_t frame_start[4];
     uint8_t schema;    /* Version of VCS schema used */
     char compile_time[20];
+    char short_hash[10];
+    bool is_dirty;
+    char tag_describe[20];
+    char last_author[20];
     uint8_t frame_end[4];
 } vcs_t;
 
