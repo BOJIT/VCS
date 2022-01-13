@@ -46,11 +46,9 @@ class GetVCS():
         with open(path, mode='rb') as file:
             file_content = file.read()
 
-            pos = self._find_all(file_content, FRAME_START)
-            print(pos)
-
-            pos = self._find_all(file_content, FRAME_END)
-            print(pos)
+            # TODO will this work with little- and big-endian representaions?
+            start = self._find_all(file_content, FRAME_START)
+            end = self._find_all(file_content, FRAME_END)
 
 ############################# Terminal Entry Point #############################
 
