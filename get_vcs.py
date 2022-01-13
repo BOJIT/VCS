@@ -5,18 +5,29 @@ Command-line tool for extracting a VCS block from a binary build.
 """
 
 import argparse
-# import struct
+import struct
 import sys
-import os
+import json
 
-# TODO try big and little-endian
+# TODO this currently assumes that your target binary is little-endian
 
 ################################## CONSTANTS ###################################
 
 __version__ = "1.0.0"
 
-FRAME_START = b'\xFF\xFE\xFD\xFE'
+FRAME_START = b'\xFF\xFE\xFD\xFC'
 FRAME_END = b'\x01\x02\x03\x04'
+
+vcs_struct = struct.Struct("<4sB20s10s?20s20s4s")
+
+vcs_map = {
+    "schema": 1,
+    "compile_time": 2,
+    "short_hash": 3,
+    "is_dirty": 4,
+    "tag_describe": 5,
+    "last_author": 6
+}
 
 ################################ Class Definition ##############################
 
@@ -42,6 +53,16 @@ class GetVCS():
 
         return loc
 
+    def _unpack_vcs(self, vcs):
+        vcs_dict = {}
+        for key in vcs_map:
+            if type(vcs[vcs_map[key]]) is bytes:
+                vcs_dict[key] = vcs[vcs_map[key]].decode("utf-8").rstrip('\x00')
+            else:
+                vcs_dict[key] = vcs[vcs_map[key]]
+
+        return vcs_dict
+
     def getVCS(self, path):
         with open(path, mode='rb') as file:
             file_content = file.read()
@@ -49,6 +70,27 @@ class GetVCS():
             # TODO will this work with little- and big-endian representaions?
             start = self._find_all(file_content, FRAME_START)
             end = self._find_all(file_content, FRAME_END)
+
+            # Find which instance of the start pattern actually corresponds to
+            # a frame (unlikely that frame start and end will appear in binary)
+            block_start = None
+            for s in start:
+                for e in end:
+                    if (e - s) == vcs_struct.size - len(FRAME_END):
+                        block_start = s
+                        break
+
+            if (block_start is None):
+                sys.stderr.write("Could not find VCS block in binary!\n")
+                sys.exit(-1)
+
+            vcs_block = vcs_struct.unpack_from(file_content, block_start)
+
+            vcs = self._unpack_vcs(vcs_block)
+
+            print(json.dumps(vcs, sort_keys=False, indent=4))
+
+            return vcs
 
 ############################# Terminal Entry Point #############################
 
