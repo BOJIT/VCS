@@ -44,7 +44,7 @@ Add the library to your project
 
 ```ini
 lib_deps =
-    bojit/VCS@^1.0.0
+    bojit/VCS@^1.0.2
 ```
 
 Include the header at least once in the project
