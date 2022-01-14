@@ -34,7 +34,7 @@ typedef struct __attribute__ ((packed)) {
     uint8_t frame_end[4];
 } vcs_t;
 
-extern vcs_t vcs;   ///< Actual version control instance
+extern const vcs_t vcs;   ///< Actual version control instance
 
 /*----------------------------------------------------------------------------*/
 

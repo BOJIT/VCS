@@ -37,7 +37,7 @@ extern "C" {
 /**
  * @brief Version control block
  */
-vcs_t vcs = {
+const vcs_t vcs = {
     {0xFF, 0xFE, 0xFD, 0xFC},   /* frame_start */
     1,                          /* schema */
     __VCS_COMPILE_TIME,         /* compile_time */
