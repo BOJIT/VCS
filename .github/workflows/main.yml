@@ -5,10 +5,10 @@ on: push
 jobs:
   publish:
     name: Publish library to PlatformIO registry
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Publish tagged commits to registry
       if: startsWith(github.event.ref, 'refs/tags')
