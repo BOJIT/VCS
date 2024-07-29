@@ -1,5 +1,5 @@
 {
-    "name" : "VCS",
+    "name": "VCS",
     "description": "Library that allows version/compilation info to be embedded in target binaries",
     "keywords": "Version Control, Git, Trace, Status",
     "authors": [
@@ -13,11 +13,11 @@
         "type": "git",
         "url": "https://github.com/BOJIT/VCS"
     },
-    "version" : "1.0.2",
+    "version": "1.1.0",
     "license": "MIT",
     "frameworks": "",
     "platforms": "",
-    "build" : {
+    "build": {
         "srcDir": "src",
         "includeDir": "src",
         "extraScript": "lib_build.py"
