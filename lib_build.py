@@ -32,7 +32,10 @@ try:
     commit_hash = g.head.object.hexsha
     short_hash = g.git.rev_parse(commit_hash, short=7)[0:10]
     is_dirty = g.is_dirty()
-    tag_describe = g.git.describe(tags=True)[0:20]
+    try:
+        tag_describe = g.git.describe(tags=True)[0:20]
+    except:
+        tag_describe = "No Tags"
     author = g.git.show("-s", "--format=%an", commit_hash)[0:20]
 except:
     commit_hash = "N/A"
